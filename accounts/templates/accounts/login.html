@@ -1,27 +1,53 @@
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'Formstyle.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center"><img src="{%static 'logo-black.png'%}" height="35" width="35">Log In</h5>
+            <form method="POST" action="{% url 'login' %}" class="form-signin">
+              {% csrf_token %}
+              <div class="form-label-group">
+                <input type="text" name='username' id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <label for="inputEmail">Username</label>
+              </div>
 
-{% if error %}
-{{ error }}
-<br />
-<br />
-{% endif %}
+              <div class="form-label-group">
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputPassword">Password</label>
+              </div>
 
-<h1>Login</h1>
+              <a href="{% url 'password_reset' %}">Forgot Password?</a>
+              <br>
+              {% if error %}
+              <br>
+              <p class="error">{{ error }}</p>
 
-<form method="POST" action="{% url 'login' %}">
-{% csrf_token %}
-Username:
-<br />
-<input type="text" name="username" />
-<br />
-Password:
-<br />
-<input type="password" name="password" />
-<br />
-<br />
-<input class="btn btn-primary" type="submit" value="Login" />
-</form>
+              <br />
+              {% endif %}
+              <br>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <hr class="my-4">
+              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-{% endblock %}
+
+  {% endblock %}
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js" charset="utf-8"></script>
+</body>

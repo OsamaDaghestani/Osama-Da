@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+         <a href="{% url 'change_password' %}"><button type="button"  class="btn btn-success"  name="button">Change Password</button></a>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <br>
+</div>
+
+{% endblock %}
